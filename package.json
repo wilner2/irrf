@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node_modules/next/dist/bin/next start"
+    "start": "next start"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "next": "10.0.5",
+    "next-redux-wrapper": "^6.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-redux": "^7.2.2",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "eslint": "^7.18.0",
-    "eslint-plugin-react": "^7.22.0"
+    "eslint-plugin-react": "^7.22.0",
+    "redux-devtools-extension": "^2.13.8"
   }
 }

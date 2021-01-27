@@ -31,6 +31,12 @@ const INITIAL_STATE = {
 };
 
 function reducer(state = INITIAL_STATE, action) {
+  if (action.type === 'TOOGLE_PESSOAS') {
+    return {
+      ...state,
+      pessoas: [...state.pessoas, action.pessoa],
+    };
+  }
   return state;
 }
 const store = createStore(reducer);

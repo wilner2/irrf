@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,7 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { connect } from 'react-redux';
+import store from '../../../../redux/store';
+import { useSelector, useDispatch } from 'react-redux';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -36,12 +38,12 @@ const useStyles = makeStyles(
   { index: 1 }
 );
 
-const CustomizedTables = ({ pessoas }) => {
+const CustomizedTables = () => {
+  const state = useSelector((state) => state);
   const classes = useStyles();
 
   return (
     <>
-      {console.log(pessoas)}
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
@@ -57,7 +59,7 @@ const CustomizedTables = ({ pessoas }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {pessoas.map((row) => (
+            {state.pessoas.map((row) => (
               <StyledTableRow key={row.cpf}>
                 <StyledTableCell component="th" scope="row">
                   {row.nome}
@@ -80,4 +82,4 @@ const CustomizedTables = ({ pessoas }) => {
   );
 };
 
-export default connect((pessoas) => pessoas)(CustomizedTables);
+export default CustomizedTables;
