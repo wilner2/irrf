@@ -1,9 +1,4 @@
 function calculo(salario, desconto, dependentes) {
-  console.log(salario);
-  console.log(desconto);
-
-  console.log(dependentes);
-
   const valorDependentes = 164.56;
   const valorBase =
     parseFloat(salario) -
