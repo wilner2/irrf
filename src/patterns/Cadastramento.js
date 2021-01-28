@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import MaterialTextField from '../infra/components/text-field/index';
-import MaterialButton from '../infra/components/botao/index';
+import { MaterialTextFieldUI } from '../infra/components/input/inputUI';
+import { ButtonUI } from '../infra/components/botao/botaoUI';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { calculoIRRF } from '../functions/calculosIrrf';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    textAlign: 'center',
+    textAlign: 'left',
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       width: 200,
@@ -95,78 +95,80 @@ function ValidationTextFields() {
   return (
     <>
       <form className={classes.root} noValidate autoComplete="off">
-        <div className={classes.nome}>
-          <MaterialTextField
-            error={erro.nome}
-            id={'standard-error'}
-            value={nome}
-            {...state.nome}
-            onChange={(e) => {
-              setErro((prevstate) => {
-                return { ...prevstate, nome: false };
-              });
-              setNome(
-                e.target.value.replace(/[0-9]/g, '').replace(/\W|_/g, '')
-              );
-            }}
-          />
-        </div>
-        <div className={classes.cpf}>
-          <MaterialTextField
-            error={erro.cPF}
-            value={cPF}
-            {...state.cPF}
-            onChange={(e) => {
-              {
-                setCPF(e.target.value.replace(/[^\d\s-/]/g, ''));
+        <div>
+          <div className={classes.nome}>
+            <MaterialTextFieldUI
+              error={erro.nome}
+              id={'standard-error'}
+              value={nome}
+              {...state.nome}
+              onChange={(e) => {
                 setErro((prevstate) => {
-                  return { ...prevstate, cPF: false };
+                  return { ...prevstate, nome: false };
                 });
-              }
-            }}
-          />
-        </div>
-        <div>
-          <MaterialTextField
-            error={erro.salario}
-            {...state.salario}
-            value={salario}
-            onChange={(e) => {
-              setErro((prevstate) => {
-                return { ...prevstate, salario: false };
-              });
-              setSalario(e.target.value.replace(/[^\d\s-/]/g, ''));
-            }}
-          />
-        </div>
-        <div>
-          <MaterialTextField
-            error={erro.desconto}
-            value={desconto}
-            {...state.desconto}
-            onChange={(e) => {
-              setErro((prevstate) => {
-                return { ...prevstate, desconto: false };
-              });
-              setDesconto(e.target.value.replace(/[^\d\s-/]/g, ''));
-            }}
-          />
-          <MaterialTextField
-            error={erro.dependentes}
-            value={dependentes}
-            {...state.dependentes}
-            onChange={(e) => {
-              setErro((prevstate) => {
-                return { ...prevstate, dependentes: false };
-              });
-              setDependentes(e.target.value.replace(/[^\d\s-/]/g, ''));
-            }}
-          />
-        </div>
-        <div className={classes.botao}>
-          <MaterialButton variant="contained" onClick={() => Enviar()}>
-            Cadastrar
-          </MaterialButton>
+                setNome(
+                  e.target.value.replace(/[0-9]/g, '').replace(/\W|_/g, '')
+                );
+              }}
+            />
+          </div>
+          <div className={classes.cpf}>
+            <MaterialTextFieldUI
+              error={erro.cPF}
+              value={cPF}
+              {...state.cPF}
+              onChange={(e) => {
+                {
+                  setCPF(e.target.value.replace(/[^\d\s-/]/g, ''));
+                  setErro((prevstate) => {
+                    return { ...prevstate, cPF: false };
+                  });
+                }
+              }}
+            />
+          </div>
+          <div>
+            <MaterialTextFieldUI
+              error={erro.salario}
+              {...state.salario}
+              value={salario}
+              onChange={(e) => {
+                setErro((prevstate) => {
+                  return { ...prevstate, salario: false };
+                });
+                setSalario(e.target.value.replace(/[^\d\s-/]/g, ''));
+              }}
+            />
+          </div>
+          <div>
+            <MaterialTextFieldUI
+              error={erro.desconto}
+              value={desconto}
+              {...state.desconto}
+              onChange={(e) => {
+                setErro((prevstate) => {
+                  return { ...prevstate, desconto: false };
+                });
+                setDesconto(e.target.value.replace(/[^\d\s-/]/g, ''));
+              }}
+            />
+            <MaterialTextFieldUI
+              error={erro.dependentes}
+              value={dependentes}
+              {...state.dependentes}
+              onChange={(e) => {
+                setErro((prevstate) => {
+                  return { ...prevstate, dependentes: false };
+                });
+                setDependentes(e.target.value.replace(/[^\d\s-/]/g, ''));
+              }}
+            />
+          </div>
+          <div className={classes.botao}>
+            <ButtonUI variant="contained" onClick={() => Enviar()}>
+              Cadastrar
+            </ButtonUI>
+          </div>
         </div>
       </form>
     </>

@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { ButtonUI } from '../infra/components/botao/botaoUI';
 import { makeStyles } from '@material-ui/core/styles';
-import EditIcon from '@material-ui/icons/Edit';
+import { EditIconUI } from '../infra/components/icons/iconsUI';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -14,15 +14,15 @@ export default function IconLabelButtons({ name }) {
 
   return (
     <div>
-      <Button
+      <ButtonUI
         variant="contained"
         color="primary"
         size="small"
         className={classes.button}
-        startIcon={<EditIcon />}
+        startIcon={<EditIconUI />}
       >
         {name}
-      </Button>
+      </ButtonUI>
     </div>
   );
 }

@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import MaterialTextField from '../text-field/index';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { ButtonUI } from '../infra/components/botao/botaoUI';
+import {
+  DialogUI,
+  DialogContentUI,
+  DialogTitleUI,
+  useMediaQueryUI,
+  DialogActionsUI,
+} from '../infra/components/Dialog/dialogUI';
+import { MaterialTextFieldUI } from '../infra/components/input/inputUI';
 import { useTheme } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { green } from '@material-ui/core/colors';
-import { calculoIRRF } from '../../../functions/calculosIrrf';
-
+import { greenUI } from '../infra/components/color/colorUI';
+import { calculoIRRF } from '../functions/calculosIrrf';
 import {
   makeStyles,
   createMuiTheme,
@@ -21,7 +22,7 @@ import {
 export default function ResponsiveDialog(props) {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const fullScreen = useMediaQueryUI(theme.breakpoints.down('sm'));
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -40,7 +41,7 @@ export default function ResponsiveDialog(props) {
 
   const themeIagree = createMuiTheme({
     palette: {
-      primary: green,
+      primary: greenUI,
     },
   });
   const useStyles = makeStyles((theme) => ({
@@ -55,7 +56,7 @@ export default function ResponsiveDialog(props) {
     botao: {
       '& > *': {
         margin: theme.spacing(1),
-        background: 'green',
+        background: 'greenUI',
       },
     },
   }));
@@ -122,20 +123,20 @@ export default function ResponsiveDialog(props) {
   return (
     <div>
       <div onClick={handleClickOpen}>{props.component}</div>
-      <Dialog
+      <DialogUI
         className={classes.root}
         fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">
+        <DialogTitleUI id="responsive-dialog-title">
           {'Recadastramento de Pessoa'}
-        </DialogTitle>
-        <DialogContent>
+        </DialogTitleUI>
+        <DialogContentUI>
           <form className={classes.root} noValidate autoComplete="off">
             <div className={classes.nome}>
-              <MaterialTextField
+              <MaterialTextFieldUI
                 error={erro.nome}
                 id={'standard-error'}
                 value={nome}
@@ -151,7 +152,7 @@ export default function ResponsiveDialog(props) {
               />
             </div>
             <div className={classes.cpf}>
-              <MaterialTextField
+              <MaterialTextFieldUI
                 error={erro.cPF}
                 value={cPF}
                 {...state.cPF}
@@ -166,7 +167,7 @@ export default function ResponsiveDialog(props) {
               />
             </div>
             <div>
-              <MaterialTextField
+              <MaterialTextFieldUI
                 error={erro.salario}
                 {...state.salario}
                 value={salario}
@@ -179,7 +180,7 @@ export default function ResponsiveDialog(props) {
               />
             </div>
             <div>
-              <MaterialTextField
+              <MaterialTextFieldUI
                 error={erro.desconto}
                 value={desconto}
                 {...state.desconto}
@@ -190,7 +191,7 @@ export default function ResponsiveDialog(props) {
                   setDesconto(e.target.value.replace(/[^\d\s-/]/g, ''));
                 }}
               />
-              <MaterialTextField
+              <MaterialTextFieldUI
                 error={erro.dependentes}
                 value={dependentes}
                 {...state.dependentes}
@@ -204,28 +205,28 @@ export default function ResponsiveDialog(props) {
             </div>
             <div className={classes.botao}></div>
           </form>
-        </DialogContent>
-        <DialogActions>
+        </DialogContentUI>
+        <DialogActionsUI>
           <ThemeProvider theme={themeIagree}>
-            <Button
+            <ButtonUI
               autoFocus
               onClick={() => Enviar()}
               variant="contained"
               color="primary"
             >
               Confirmar
-            </Button>
+            </ButtonUI>
           </ThemeProvider>
-          <Button
+          <ButtonUI
             onClick={handleClose}
             variant="contained"
             color="secondary"
             autoFocus
           >
             Cancelar
-          </Button>
-        </DialogActions>
-      </Dialog>
+          </ButtonUI>
+        </DialogActionsUI>
+      </DialogUI>
     </div>
   );
 }

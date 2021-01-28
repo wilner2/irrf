@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import BotaoDeletar from '../botao/delete';
-import BotaoEditar from '../botao/edit';
-import Modal from '../modal/modal';
+import {
+  TableUI,
+  TableBodyUI,
+  TableCellUI,
+  TableContainerUI,
+  TableHeadUI,
+  TableRowUI,
+} from '../infra/components/tabela/tabelaUI';
+import { PaperUi } from '../infra/components/paper/paperUI';
+import BotaoDeletar from '../components/delete';
+import BotaoEditar from '../components/edit';
+import Modal from './Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import Cadastramento from '../../../patterns/Cadastramento';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -22,7 +22,7 @@ const StyledTableCell = withStyles((theme) => ({
   body: {
     fontSize: 14,
   },
-}))(TableCell);
+}))(TableCellUI);
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
@@ -30,7 +30,7 @@ const StyledTableRow = withStyles((theme) => ({
       backgroundColor: theme.palette.action.hover,
     },
   },
-}))(TableRow);
+}))(TableRowUI);
 
 const useStyles = makeStyles(
   {
@@ -65,10 +65,10 @@ const CustomizedTables = () => {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="customized table">
-          <TableHead>
-            <TableRow>
+      <TableContainerUI component={PaperUi}>
+        <TableUI className={classes.table} aria-label="customized table">
+          <TableHeadUI>
+            <TableRowUI>
               <StyledTableCell>Nome</StyledTableCell>
               <StyledTableCell>CPF</StyledTableCell>
               <StyledTableCell>Sálario</StyledTableCell>
@@ -77,9 +77,9 @@ const CustomizedTables = () => {
               <StyledTableCell>Desconto IRRF</StyledTableCell>
               <StyledTableCell></StyledTableCell>
               <StyledTableCell></StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
+            </TableRowUI>
+          </TableHeadUI>
+          <TableBodyUI>
             {state.pessoas.map((row, indice) => (
               <StyledTableRow key={row.cpf}>
                 <StyledTableCell component="th" scope="row">
@@ -121,9 +121,9 @@ const CustomizedTables = () => {
                 </StyledTableCell>
               </StyledTableRow>
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          </TableBodyUI>
+        </TableUI>
+      </TableContainerUI>
     </>
   );
 };

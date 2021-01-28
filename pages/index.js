@@ -1,4 +1,4 @@
-import Tabela from '../src/infra/components/tabela';
+import Tabela from '../src/patterns/tabela';
 import store from '../redux/store';
 import { Provider } from 'react-redux';
 import Cadastramento from '../src/patterns/Cadastramento';
