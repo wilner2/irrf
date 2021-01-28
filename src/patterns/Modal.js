@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import PropTypes from 'prop-types';
 import { ButtonUI } from '../infra/components/botao/botaoUI';
 import {
   DialogUI,
@@ -230,3 +230,8 @@ export default function ResponsiveDialog(props) {
     </div>
   );
 }
+ResponsiveDialog.propTypes = {
+  dados: PropTypes.any,
+  indicePessoa: PropTypes.number,
+  component: PropTypes.any,
+};

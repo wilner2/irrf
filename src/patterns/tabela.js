@@ -46,7 +46,6 @@ const CustomizedTables = () => {
   const state = useSelector((state) => state);
   const classes = useStyles();
   const [openModal, setOpenModal] = useState(false);
-  const [dadosModal, setDadosModal] = useState('');
 
   function handleClose() {
     setOpenModal(false);
@@ -58,8 +57,7 @@ const CustomizedTables = () => {
   function deletarDadosPessoa(indice) {
     dispatch(toggleDeletePessoas(indice));
   }
-  function editarDadosPessoa(indice) {
-    setDadosModal(state.pessoas.find((v, i) => i === indice));
+  function editarDadosPessoa() {
     setOpenModal(true);
   }
 
