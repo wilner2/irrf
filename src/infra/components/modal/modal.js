@@ -9,7 +9,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from '@material-ui/core/styles';
 
 export default function ResponsiveDialog(props) {
   const [open, setOpen] = React.useState(false);
@@ -30,18 +35,25 @@ export default function ResponsiveDialog(props) {
   const [desconto, setDesconto] = useState(props.dados.desconto);
   const [dependentes, setDependentes] = useState(props.dados.dependentes);
   const [erro, setErro] = useState({});
+
+  const themeIagree = createMuiTheme({
+    palette: {
+      primary: green,
+    },
+  });
   const useStyles = makeStyles((theme) => ({
     root: {
+      textAlign: 'center',
       '& .MuiTextField-root': {
         margin: theme.spacing(1),
         width: 200,
       },
     },
-    nome: { '& .MuiTextField-root': { width: '50%' } },
-    cpf: { '& .MuiTextField-root': { width: '24%' } },
+
     botao: {
       '& > *': {
         margin: theme.spacing(1),
+        background: 'green',
       },
     },
   }));
@@ -99,6 +111,7 @@ export default function ResponsiveDialog(props) {
     <div>
       <div onClick={handleClickOpen}>{props.component}</div>
       <Dialog
+        className={classes.root}
         fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
@@ -181,10 +194,22 @@ export default function ResponsiveDialog(props) {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={() => Enviar()} color="primary">
-            Agree
-          </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <ThemeProvider theme={themeIagree}>
+            <Button
+              autoFocus
+              onClick={() => Enviar()}
+              variant="contained"
+              color="primary"
+            >
+              Agree
+            </Button>
+          </ThemeProvider>
+          <Button
+            onClick={handleClose}
+            variant="contained"
+            color="secondary"
+            autoFocus
+          >
             Disagree
           </Button>
         </DialogActions>

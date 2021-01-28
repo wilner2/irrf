@@ -6,11 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    textAlign: 'center',
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       width: 200,
     },
   },
+
   nome: { '& .MuiTextField-root': { width: '50%' } },
   cpf: { '& .MuiTextField-root': { width: '24%' } },
   botao: {
