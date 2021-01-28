@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -10,7 +10,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import BotaoDeletar from '../botao/delete';
 import BotaoEditar from '../botao/edit';
+import Modal from '../modal/modal';
 import { useSelector, useDispatch } from 'react-redux';
+import Cadastramento from '../../../patterns/Cadastramento';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -43,12 +45,22 @@ const CustomizedTables = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const classes = useStyles();
+  const [openModal, setOpenModal] = useState(false);
+  const [dadosModal, setDadosModal] = useState('');
+
+  function handleClose() {
+    setOpenModal(false);
+  }
 
   function toggleDeletePessoas(pessoa) {
     return { type: 'DELETE_PESSOAS', pessoa };
   }
   function deletarDadosPessoa(indice) {
     dispatch(toggleDeletePessoas(indice));
+  }
+  function editarDadosPessoa(indice) {
+    setDadosModal(state.pessoas.find((v, i) => i === indice));
+    setOpenModal(true);
   }
 
   return (
@@ -81,7 +93,19 @@ const CustomizedTables = () => {
                 <StyledTableCell>{row.dependentes}</StyledTableCell>
                 <StyledTableCell>{'Desconto IRRF'}</StyledTableCell>
                 <StyledTableCell>
-                  <BotaoEditar name="Editar" />
+                  <div
+                    onClick={() => {
+                      editarDadosPessoa(indice);
+                    }}
+                  >
+                    <Modal
+                      dados={state.pessoas.find((v, i) => indice === i)}
+                      indicePessoa={indice}
+                      open={openModal}
+                      onClose={handleClose}
+                      component={<BotaoEditar name="Editar" />}
+                    ></Modal>
+                  </div>
                 </StyledTableCell>
                 <StyledTableCell>
                   <div
