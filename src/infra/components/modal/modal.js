@@ -64,38 +64,47 @@ export default function ResponsiveDialog(props) {
   }
 
   const Enviar = () => {
+    let validacao = {};
     if (!nome.trim().replace(/\s+/g, ' ')) {
+      validacao.nome = true;
       setErro((prevstate) => {
         return { ...prevstate, nome: true };
       });
     }
     if (cPF.length !== 11 || !/^\d+$/.test(cPF)) {
+      validacao.cpf = true;
       setErro((prevstate) => {
+        validacao.cpf = true;
         return { ...prevstate, cPF: true };
       });
     }
     if (!cPF) {
+      validacao.cpf = true;
+
       setErro((prevstate) => {
         return { ...prevstate, cPF: true };
       });
     }
-    if (!salario) {
+    if (!salario && salario != 0) {
+      validacao.salario = true;
       setErro((prevstate) => {
         return { ...prevstate, salario: true };
       });
     }
-    if (!desconto) {
+    if (!desconto && desconto != 0) {
+      validacao.desconto = true;
+
       setErro((prevstate) => {
         return { ...prevstate, desconto: true };
       });
     }
-    if (!toString(dependentes)) {
+    if (!dependentes && dependentes != 0) {
+      validacao.desconto = true;
       setErro((prevstate) => {
         return { ...prevstate, dependentes: true };
       });
     }
-    if (Object.values(erro).some((error) => error !== true)) {
-      console.log('sssssssss');
+    if (Object.keys(validacao).length === 0) {
       const dadosDaPessoa = {
         nome,
         cpf: cPF,

@@ -44,15 +44,6 @@ function reducer(state = INITIAL_STATE, action) {
     };
   }
   if (action.type === 'EDIT_PESSOAS') {
-    console.log(
-      state.pessoas.map((pessoa, i) => {
-        if (i === action.indicePessoa) {
-          return action.pessoa;
-        } else {
-          return pessoa;
-        }
-      })
-    );
     return {
       ...state,
       pessoas: state.pessoas.map((pessoa, i) => {
