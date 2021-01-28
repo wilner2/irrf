@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -8,7 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import store from '../../../../redux/store';
+import BotaoDeletar from '../botao/delete';
+import BotaoEditar from '../botao/edit';
 import { useSelector, useDispatch } from 'react-redux';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -39,8 +40,16 @@ const useStyles = makeStyles(
 );
 
 const CustomizedTables = () => {
+  const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const classes = useStyles();
+
+  function toggleDeletePessoas(pessoa) {
+    return { type: 'DELETE_PESSOAS', pessoa };
+  }
+  function deletarDadosPessoa(indice) {
+    dispatch(toggleDeletePessoas(indice));
+  }
 
   return (
     <>
@@ -54,12 +63,12 @@ const CustomizedTables = () => {
               <StyledTableCell>Desconto</StyledTableCell>
               <StyledTableCell>Dependentes</StyledTableCell>
               <StyledTableCell>Desconto IRRF</StyledTableCell>
-              <StyledTableCell>Editar</StyledTableCell>
-              <StyledTableCell>Deletar</StyledTableCell>
+              <StyledTableCell></StyledTableCell>
+              <StyledTableCell></StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {state.pessoas.map((row) => (
+            {state.pessoas.map((row, indice) => (
               <StyledTableRow key={row.cpf}>
                 <StyledTableCell component="th" scope="row">
                   {row.nome}
@@ -71,8 +80,18 @@ const CustomizedTables = () => {
                 <StyledTableCell>{row.desconto}</StyledTableCell>
                 <StyledTableCell>{row.dependentes}</StyledTableCell>
                 <StyledTableCell>{'Desconto IRRF'}</StyledTableCell>
-                <StyledTableCell>{'Editar'}</StyledTableCell>
-                <StyledTableCell>{'Deletar'}</StyledTableCell>
+                <StyledTableCell>
+                  <BotaoEditar name="Editar" />
+                </StyledTableCell>
+                <StyledTableCell>
+                  <div
+                    onClick={() => {
+                      deletarDadosPessoa(indice);
+                    }}
+                  >
+                    <BotaoDeletar name="Deletar" />
+                  </div>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

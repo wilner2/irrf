@@ -23,9 +23,7 @@ const useStyles = makeStyles((theme) => ({
 function ValidationTextFields() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-
   const classes = useStyles();
-
   const [cPF, setCPF] = useState('');
   const [nome, setNome] = useState('');
   const [salario, setSalario] = useState('');

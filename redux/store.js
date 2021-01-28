@@ -37,6 +37,12 @@ function reducer(state = INITIAL_STATE, action) {
       pessoas: [...state.pessoas, action.pessoa],
     };
   }
+  if (action.type === 'DELETE_PESSOAS') {
+    return {
+      ...state,
+      pessoas: state.pessoas.filter((v, i) => i !== action.pessoa),
+    };
+  }
   return state;
 }
 const store = createStore(reducer);
