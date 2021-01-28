@@ -86,12 +86,15 @@ const CustomizedTables = () => {
                   {row.nome}
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
-                  {row.cpf}
+                  {row.cpf.replace(
+                    /(\d{3})(\d{3})(\d{3})(\d{2})/,
+                    '$1.$2.$3-$4'
+                  )}
                 </StyledTableCell>
                 <StyledTableCell>{row.salario}</StyledTableCell>
                 <StyledTableCell>{row.desconto}</StyledTableCell>
                 <StyledTableCell>{row.dependentes}</StyledTableCell>
-                <StyledTableCell>{'Desconto IRRF'}</StyledTableCell>
+                <StyledTableCell>{row.descontoIRRF.toFixed(2)}</StyledTableCell>
                 <StyledTableCell>
                   <div
                     onClick={() => {

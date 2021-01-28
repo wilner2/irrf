@@ -3,6 +3,7 @@ import MaterialTextField from '../infra/components/text-field/index';
 import MaterialButton from '../infra/components/botao/index';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
+import { calculoIRRF } from '../functions/calculosIrrf';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,6 +83,7 @@ function ValidationTextFields() {
       const dadosDaPessoa = {
         nome,
         cpf: cPF,
+        descontoIRRF: calculoIRRF(salario, desconto, dependentes),
         salario,
         desconto,
         dependentes,

@@ -1,8 +1,18 @@
 import { createStore } from 'redux';
 import jsonPessoas from '../pessoa.json';
+import { calculoIRRF } from '../src/functions/calculosIrrf';
 
 const INITIAL_STATE = {
-  pessoas: jsonPessoas,
+  pessoas: jsonPessoas.map((pessoa) => {
+    return {
+      ...pessoa,
+      descontoIRRF: calculoIRRF(
+        pessoa.salario,
+        pessoa.desconto,
+        pessoa.dependentes
+      ),
+    };
+  }),
   nome: {
     id: 'standard-error',
     label: 'Nome',

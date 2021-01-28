@@ -10,6 +10,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { green } from '@material-ui/core/colors';
+import { calculoIRRF } from '../../../functions/calculosIrrf';
+
 import {
   makeStyles,
   createMuiTheme,
@@ -108,6 +110,7 @@ export default function ResponsiveDialog(props) {
       const dadosDaPessoa = {
         nome,
         cpf: cPF,
+        descontoIRRF: calculoIRRF(salario, desconto, dependentes),
         salario,
         desconto,
         dependentes,
@@ -210,7 +213,7 @@ export default function ResponsiveDialog(props) {
               variant="contained"
               color="primary"
             >
-              Agree
+              Confirmar
             </Button>
           </ThemeProvider>
           <Button
@@ -219,7 +222,7 @@ export default function ResponsiveDialog(props) {
             color="secondary"
             autoFocus
           >
-            Disagree
+            Cancelar
           </Button>
         </DialogActions>
       </Dialog>
