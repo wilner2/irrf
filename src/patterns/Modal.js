@@ -88,20 +88,22 @@ export default function ResponsiveDialog(props) {
         return { ...prevstate, cPF: true };
       });
     }
-    if (!salario && salario != 0) {
+
+    if (!salario && toString(salario) !== '0') {
       validacao.salario = true;
       setErro((prevstate) => {
         return { ...prevstate, salario: true };
       });
     }
-    if (!desconto && desconto != 0) {
+    if (!desconto && toString(desconto) !== '0') {
       validacao.desconto = true;
-
+      console.log('ssssssssss');
       setErro((prevstate) => {
         return { ...prevstate, desconto: true };
       });
     }
-    if (!dependentes && dependentes != 0) {
+
+    if (!dependentes && toString(dependentes) !== '0') {
       validacao.desconto = true;
       setErro((prevstate) => {
         return { ...prevstate, dependentes: true };
